@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.cn/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-4xl: 0;
+  --font-sans: 'Courier Prime', ui-monospace, 'Courier New', monospace;
+  --font-mono: 'Courier Prime', ui-monospace, 'Courier New', monospace;
+  --font-serif: 'Courier Prime', ui-monospace, 'Courier New', monospace;
+
+  /* Sailor Draft palette */
+  --color-ink: #111111;
+  --color-page: #FAF7F0;
+  --color-desk: #E7E2D6;
+  --color-rule: #D8D2C2;
+  --color-muted-ink: #6B675C;
+  --color-margin-red: #B03A2E;
+}
+
+:root {
+  --radius: 0;
+  --background: #E7E2D6;
+  --foreground: #111111;
+  --card: #FAF7F0;
+  --card-foreground: #111111;
+  --popover: #FAF7F0;
+  --popover-foreground: #111111;
+  --primary: #111111;
+  --primary-foreground: #FAF7F0;
+  --secondary: #EFEADD;
+  --secondary-foreground: #111111;
+  --muted: #EFEADD;
+  --muted-foreground: #6B675C;
+  --accent: #EFEADD;
+  --accent-foreground: #111111;
+  --destructive: #B03A2E;
+  --border: #D8D2C2;
+  --input: #D8D2C2;
+  --ring: #6B675C;
+  --chart-1: #111111;
+  --chart-2: #6B675C;
+  --chart-3: #B03A2E;
+  --chart-4: #D8D2C2;
+  --chart-5: #FAF7F0;
+  --sidebar: #FAF7F0;
+  --sidebar-foreground: #111111;
+  --sidebar-primary: #111111;
+  --sidebar-primary-foreground: #FAF7F0;
+  --sidebar-accent: #EFEADD;
+  --sidebar-accent-foreground: #111111;
+  --sidebar-border: #D8D2C2;
+  --sidebar-ring: #6B675C;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Courier Prime', ui-monospace, 'Courier New', monospace;
+  }
+  ::selection {
+    background: #111111;
+    color: #FAF7F0;
+  }
+}
+
+body {
+  font-family: 'Courier Prime', ui-monospace, 'Courier New', monospace;
+}
+
+/* Screenplay geometry: 8.5in @ 96dpi ≈ 816px, 12pt Courier Prime ≈ 16px */
+.screenplay-page {
+  width: 816px;
+  min-height: 1056px; /* 11in */
+  padding: 96px 96px 96px 144px; /* T R B L (1in/1in/1in/1.5in) */
+  background: #FAF7F0;
+  color: #111111;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.04),
+    0 24px 48px -24px rgba(60, 50, 30, 0.18);
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.screenplay-row {
+  display: block;
+  width: 100%;
+}
+.screenplay-line {
+  font-family: 'Courier Prime', 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1;
+  min-height: 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: hidden;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: #111111;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  resize: none;
+  display: block;
+  caret-color: #111111;
+  letter-spacing: 0;
+}
+.screenplay-line::placeholder {
+  color: #B8B2A2;
+}
+
+/* Element-typed rows mirror Academy screenplay indents.
+   Text area inside the page is 576px wide (8.5in - 1.5in - 1in = 6in @ 96dpi). */
+.row-scene {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.row-action {
+  margin-bottom: 8px;
+}
+.row-character {
+  text-transform: uppercase;
+  margin-left: 208px; /* ~2.2in */
+  max-width: 320px;
+  margin-top: 16px;
+}
+.row-parenthetical {
+  margin-left: 160px;
+  max-width: 240px;
+  text-transform: none;
+}
+.row-dialogue {
+  margin-left: 96px;
+  max-width: 336px;
+  margin-bottom: 8px;
+}
+.row-transition {
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.row-shot {
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+/* Print: camera-ready screenplay */
+@media print {
+  @page {
+    size: Letter;
+    margin: 0;
+  }
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .screenplay-page {
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  .screenplay-line {
+    color: #000000 !important;
+    background: transparent !important;
+  }
+}
