@@ -1,42 +1,42 @@
 # projects
 
-这是一个基于 [Next.js 16](https://nextjs.org) + [shadcn/ui](https://ui.shadcn.com) 的全栈应用项目，当前默认运行方式已经调整为标准 Next.js 工作流，可直接连接 GitHub 后部署到 Vercel 作为展示站点。
+This is a full-stack application built with [Next.js 16](https://nextjs.org) + [shadcn/ui](https://ui.shadcn.com). Its default workflow has been switched to the standard Next.js workflow, so it can be connected to GitHub and deployed to Vercel as a showcase site.
 
-## 快速开始
+## Quick Start
 
-### 启动开发服务器
+### Start the Development Server
 
 ```bash
 pnpm dev
 ```
 
-启动后，在浏览器中打开 [http://localhost:3000](http://localhost:3000) 查看应用。
+After startup, open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-开发服务器支持热更新，修改代码后页面会自动刷新。
+The development server supports hot reload — pages refresh automatically when you modify code.
 
-### 构建生产版本
+### Build for Production
 
 ```bash
 pnpm build
 ```
 
-### 启动生产服务器
+### Start the Production Server
 
 ```bash
 pnpm start
 ```
 
-### 部署到 Vercel
+### Deploy to Vercel
 
-1. 将仓库推送到 GitHub
-2. 在 Vercel 中导入该 GitHub 仓库
-3. 保持默认识别的 Next.js 配置即可完成构建与部署
+1. Push the repository to GitHub
+2. Import the GitHub repository in Vercel
+3. Keep the default Next.js settings and the build and deployment will complete
 
-本项目不要求额外自定义 Vercel 构建命令；默认使用 `pnpm build` 即可。
+No custom Vercel build command is required; the default `pnpm build` works fine.
 
-### 保留的 Coze 工作流
+### Retained Coze Workflows
 
-如果你仍需在扣子环境中使用原有脚本，可继续使用：
+If you still need the original scripts in the Coze environment, you can continue to use:
 
 ```bash
 pnpm dev:coze
@@ -44,36 +44,36 @@ pnpm build:coze
 pnpm start:coze
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 src/
-├── app/                      # Next.js App Router 目录
-│   ├── layout.tsx           # 根布局组件
-│   ├── page.tsx             # 首页
-│   ├── globals.css          # 全局样式（包含 shadcn 主题变量）
-│   └── [route]/             # 其他路由页面
-├── components/              # React 组件目录
-│   └── ui/                  # shadcn/ui 基础组件（优先使用）
+├── app/                      # Next.js App Router directory
+│   ├── layout.tsx           # Root layout component
+│   ├── page.tsx             # Home page
+│   ├── globals.css          # Global styles (includes shadcn theme variables)
+│   └── [route]/             # Other route pages
+├── components/              # React components directory
+│   └── ui/                  # shadcn/ui base components (preferred)
 │       ├── button.tsx
 │       ├── card.tsx
 │       └── ...
-├── lib/                     # 工具函数库
-│   └── utils.ts            # cn() 等工具函数
-├── hooks/                   # 自定义 React Hooks（可选）
-└── server.ts                # 保留的自定义服务端入口（用于 Coze 工作流）
+├── lib/                     # Utility functions library
+│   └── utils.ts            # Utility functions such as cn()
+├── hooks/                   # Custom React Hooks (optional)
+└── server.ts                # Retained custom server entry (for the Coze workflow)
 ```
 
-## 核心开发规范
+## Core Development Guidelines
 
-### 1. 组件开发
+### 1. Component Development
 
-**优先使用 shadcn/ui 基础组件**
+**Prefer shadcn/ui base components**
 
-本项目已预装完整的 shadcn/ui 组件库，位于 `src/components/ui/` 目录。开发时应优先使用这些组件作为基础：
+This project ships with a complete shadcn/ui component library in the `src/components/ui/` directory. You should prefer these components as the foundation during development:
 
 ```tsx
-// ✅ 推荐：使用 shadcn 基础组件
+// ✅ Recommended: use shadcn base components
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -91,36 +91,36 @@ export default function MyComponent() {
 }
 ```
 
-**可用的 shadcn 组件清单**
+**Available shadcn Components**
 
-- 表单：`button`, `input`, `textarea`, `select`, `checkbox`, `radio-group`, `switch`, `slider`
-- 布局：`card`, `separator`, `tabs`, `accordion`, `collapsible`, `scroll-area`
-- 反馈：`alert`, `alert-dialog`, `dialog`, `toast`, `sonner`, `progress`
-- 导航：`dropdown-menu`, `menubar`, `navigation-menu`, `context-menu`
-- 数据展示：`table`, `avatar`, `badge`, `hover-card`, `tooltip`, `popover`
-- 其他：`calendar`, `command`, `carousel`, `resizable`, `sidebar`
+- Forms: `button`, `input`, `textarea`, `select`, `checkbox`, `radio-group`, `switch`, `slider`
+- Layout: `card`, `separator`, `tabs`, `accordion`, `collapsible`, `scroll-area`
+- Feedback: `alert`, `alert-dialog`, `dialog`, `toast`, `sonner`, `progress`
+- Navigation: `dropdown-menu`, `menubar`, `navigation-menu`, `context-menu`
+- Data display: `table`, `avatar`, `badge`, `hover-card`, `tooltip`, `popover`
+- Other: `calendar`, `command`, `carousel`, `resizable`, `sidebar`
 
-详见 `src/components/ui/` 目录下的具体组件实现。
+See the component implementations under `src/components/ui/` for details.
 
-### 2. 路由开发
+### 2. Routing Development
 
-Next.js 使用文件系统路由，在 `src/app/` 目录下创建文件夹即可添加路由：
+Next.js uses file-system routing; create a folder under `src/app/` to add a route:
 
 ```bash
-# 创建新路由 /about
+# Create a new route /about
 src/app/about/page.tsx
 
-# 创建动态路由 /posts/[id]
+# Create a dynamic route /posts/[id]
 src/app/posts/[id]/page.tsx
 
-# 创建路由组（不影响 URL）
+# Create a route group (does not affect the URL)
 src/app/(marketing)/about/page.tsx
 
-# 创建 API 路由
+# Create an API route
 src/app/api/users/route.ts
 ```
 
-**页面组件示例**
+**Page Component Example**
 
 ```tsx
 // src/app/about/page.tsx
@@ -141,7 +141,7 @@ export default function AboutPage() {
 }
 ```
 
-**动态路由示例**
+**Dynamic Route Example**
 
 ```tsx
 // src/app/posts/[id]/page.tsx
@@ -156,7 +156,7 @@ export default async function PostPage({
 }
 ```
 
-**API 路由示例**
+**API Route Example**
 
 ```tsx
 // src/app/api/users/route.ts
@@ -172,42 +172,42 @@ export async function POST(request: Request) {
 }
 ```
 
-### 3. 依赖管理
+### 3. Dependency Management
 
-**必须使用 pnpm 管理依赖**
+**pnpm must be used for dependency management**
 
 ```bash
-# ✅ 安装依赖
+# ✅ Install dependencies
 pnpm install
 
-# ✅ 添加新依赖
+# ✅ Add a new dependency
 pnpm add package-name
 
-# ✅ 添加开发依赖
+# ✅ Add a development dependency
 pnpm add -D package-name
 
-# ❌ 禁止使用 npm 或 yarn
-# npm install  # 错误！
-# yarn add     # 错误！
+# ❌ Do not use npm or yarn
+# npm install  # Wrong!
+# yarn add     # Wrong!
 ```
 
-项目已配置 `preinstall` 脚本，使用其他包管理器会报错。
+The project has a `preinstall` script configured; using other package managers will result in an error.
 
-### 4. 样式开发
+### 4. Styling Development
 
-**使用 Tailwind CSS v4**
+**Using Tailwind CSS v4**
 
-本项目使用 Tailwind CSS v4 进行样式开发，并已配置 shadcn 主题变量。
+This project uses Tailwind CSS v4 for styling and comes with shadcn theme variables configured.
 
 ```tsx
-// 使用 Tailwind 类名
+// Using Tailwind classes
 <div className="flex items-center gap-4 p-4 rounded-lg bg-background">
   <Button className="bg-primary text-primary-foreground">
     主要按钮
   </Button>
 </div>
 
-// 使用 cn() 工具函数合并类名
+// Merge class names with the cn() utility
 import { cn } from '@/lib/utils';
 
 <div className={cn(
@@ -219,9 +219,9 @@ import { cn } from '@/lib/utils';
 </div>
 ```
 
-**主题变量**
+**Theme Variables**
 
-主题变量定义在 `src/app/globals.css` 中，支持亮色/暗色模式：
+Theme variables are defined in `src/app/globals.css` and support light/dark mode:
 
 - `--background`, `--foreground`
 - `--primary`, `--primary-foreground`
@@ -231,9 +231,9 @@ import { cn } from '@/lib/utils';
 - `--destructive`, `--destructive-foreground`
 - `--border`, `--input`, `--ring`
 
-### 5. 表单开发
+### 5. Form Development
 
-推荐使用 `react-hook-form` + `zod` 进行表单开发：
+We recommend `react-hook-form` + `zod` for form development:
 
 ```tsx
 import { useForm } from 'react-hook-form';
@@ -267,15 +267,15 @@ export default function MyForm() {
 }
 ```
 
-### 6. 数据获取
+### 6. Data Fetching
 
-**服务端组件（推荐）**
+**Server Components (Recommended)**
 
 ```tsx
 // src/app/posts/page.tsx
 async function getPosts() {
   const res = await fetch('https://api.example.com/posts', {
-    cache: 'no-store', // 或 'force-cache'
+    cache: 'no-store', // or 'force-cache'
   });
   return res.json();
 }
@@ -293,7 +293,7 @@ export default async function PostsPage() {
 }
 ```
 
-**客户端组件**
+**Client Components**
 
 ```tsx
 'use client';
@@ -313,23 +313,23 @@ export default function ClientComponent() {
 }
 ```
 
-## 常见开发场景
+## Common Development Scenarios
 
-### 添加新页面
+### Adding a New Page
 
-1. 在 `src/app/` 下创建文件夹和 `page.tsx`
-2. 使用 shadcn 组件构建 UI
-3. 根据需要添加 `layout.tsx` 和 `loading.tsx`
+1. Create a folder and `page.tsx` under `src/app/`
+2. Build the UI with shadcn components
+3. Add `layout.tsx` and `loading.tsx` as needed
 
-### 创建业务组件
+### Creating Business Components
 
-1. 在 `src/components/` 下创建组件文件（非 UI 组件）
-2. 优先组合使用 `src/components/ui/` 中的基础组件
-3. 使用 TypeScript 定义 Props 类型
+1. Create the component file under `src/components/` (non-UI components)
+2. Prefer composing from the base components in `src/components/ui/`
+3. Define prop types with TypeScript
 
-### 添加全局状态
+### Adding Global State
 
-推荐使用 React Context 或 Zustand：
+Use React Context or Zustand:
 
 ```tsx
 // src/lib/store.ts
@@ -346,32 +346,32 @@ export const useStore = create<Store>((set) => ({
 }));
 ```
 
-### 集成数据库
+### Integrating a Database
 
-推荐使用 Prisma 或 Drizzle ORM，在 `src/lib/db.ts` 中配置。
+Use Prisma or Drizzle ORM, configured in `src/lib/db.ts`.
 
-## 技术栈
+## Tech Stack
 
-- **框架**: Next.js 16.1.1 (App Router)
-- **UI 组件**: shadcn/ui (基于 Radix UI)
-- **样式**: Tailwind CSS v4
-- **表单**: React Hook Form + Zod
-- **图标**: Lucide React
-- **字体**: Courier Prime
-- **包管理器**: pnpm 9+
+- **Framework**: Next.js 16.1.1 (App Router)
+- **UI components**: shadcn/ui (built on Radix UI)
+- **Styling**: Tailwind CSS v4
+- **Forms**: React Hook Form + Zod
+- **Icons**: Lucide React
+- **Fonts**: Courier Prime
+- **Package manager**: pnpm 9+
 - **TypeScript**: 5.x
 
-## 参考文档
+## References
 
-- [Next.js 官方文档](https://nextjs.org/docs)
-- [shadcn/ui 组件文档](https://ui.shadcn.com)
-- [Tailwind CSS 文档](https://tailwindcss.com/docs)
+- [Next.js Official Documentation](https://nextjs.org/docs)
+- [shadcn/ui Component Documentation](https://ui.shadcn.com)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [React Hook Form](https://react-hook-form.com)
 
-## 重要提示
+## Important Notes
 
-1. **必须使用 pnpm** 作为包管理器
-2. **优先使用 shadcn/ui 组件** 而不是从零开发基础组件
-3. **遵循 Next.js App Router 规范**，正确区分服务端/客户端组件
-4. **使用 TypeScript** 进行类型安全开发
-5. **使用 `@/` 路径别名** 导入模块（已配置）
+1. **pnpm must be used** as the package manager
+2. **Prefer shadcn/ui components** over building base components from scratch
+3. **Follow Next.js App Router conventions** and correctly distinguish server/client components
+4. **Use TypeScript** for type-safe development
+5. **Use the `@/` path alias** to import modules (already configured)
